@@ -9,4 +9,29 @@
   <% @users.each do |user| %>
     <%= render 'user_row', :user => user %>
   <% end %>
+
+<div class="pagination">
+  <ul>
+    <li><%= link_to "Prev", root_path(:page => [@current_page-1, 1].max) %></li>
+    
+    <% 5.downto(1) do |limit| %>
+     <% if @current_page > limit %> 
+      <li><%= link_to "#{@current_page - limit}", root_path(:page => @current_page - limit) %></li>
+      <% end %>
+    <%end%>
+    
+    <li class="active"> <a href="#"><%= @current_page %></a></li>
+
+    <% 1.upto(5) do |limit| %>
+     <% if @current_page <= max_page - limit %> 
+      <li><%= link_to "#{@current_page + limit}", root_path(:page => @current_page + limit) %></li>
+      <% end %>
+    <%end%>
+
+    <li><%= link_to "Next", root_path(:page => [@current_page+1, max_page].min) %></li>
+  </ul>
+</div>
+
 </table>
+
+

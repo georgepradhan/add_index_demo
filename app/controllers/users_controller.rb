@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
+  include ApplicationHelper
+  
   def index
-    @users = User.by_karma.limit(50)
+    @current_page = current_page
+    @users = User.page(@current_page)
   end
+
 end
+
+

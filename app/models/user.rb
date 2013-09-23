@@ -28,4 +28,9 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def self.page(num)
+    self.by_karma.limit(50).offset(50*(num-1))
+  end
+
 end
